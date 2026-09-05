@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sanjeev Kumar – Digital Skills Mentor</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0D1B2A;
+    --navy-mid: #162336;
+    --blue: #1565C0;
+    --blue-bright: #1976D2;
+    --accent: #FF6B35;
+    --accent-light: #FF8C5A;
+    --white: #FFFFFF;
+    --off-white: #F0F4F8;
+    --muted: #8FA3B1;
+    --green: #00C853;
+    --wa-green: #25D366;
+  }
+
+  body {
+    font-family: 'Poppins', 'Noto Sans Devanagari', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(13, 27, 42, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(21, 101, 192, 0.3);
+    padding: 14px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav-logo {
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: var(--white);
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-cta {
+    background: var(--wa-green);
+    color: #fff;
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100svh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 40px;
+    padding: 60px 5% 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(21,101,192,0.25) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-text { position: relative; z-index: 2; }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 107, 53, 0.15);
+    border: 1px solid rgba(255, 107, 53, 0.4);
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent-light);
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 16px;
+    letter-spacing: -1px;
+  }
+  .hero h1 .highlight {
+    color: var(--accent);
+    display: block;
+  }
+  .hero-sub {
+    font-size: 1rem;
+    color: #A8C0D0;
+    margin-bottom: 32px;
+    max-width: 440px;
+  }
+  .hero-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+  .btn-wa {
+    background: var(--wa-green);
+    color: #fff;
+    padding: 14px 28px;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-wa:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(37, 211, 102, 0.45); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--white);
+    padding: 14px 28px;
+    border-radius: 50px;
+    border: 1.5px solid rgba(255,255,255,0.25);
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .hero-stats {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+  .stat strong {
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .stat span { font-size: 0.75rem; color: var(--muted); }
+
+  /* ── HERO IMAGE ── */
+  .hero-img-wrap {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+  }
+  .hero-img-frame {
+    position: relative;
+    width: min(340px, 90vw);
+  }
+  .hero-img-frame::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 24px;
+    background: linear-gradient(135deg, var(--blue), var(--accent));
+    z-index: 0;
+  }
+  .hero-img-frame img {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    border-radius: 22px;
+    display: block;
+    object-fit: cover;
+    aspect-ratio: 4/5;
+  }
+  .hero-tag {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    background: rgba(13,27,42,0.9);
+    border: 1px solid rgba(21,101,192,0.5);
+    border-radius: 50px;
+    padding: 8px 20px;
+    white-space: nowrap;
+    font-size: 0.8rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    backdrop-filter: blur(8px);
+  }
+  .live-dot {
+    width: 8px; height: 8px;
+    background: var(--green);
+    border-radius: 50%;
+    animation: pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.4); }
+  }
+
+  /* ── SECTION SHARED ── */
+  section { padding: 72px 5%; }
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--blue-bright);
+    margin-bottom: 10px;
+  }
+  h2 {
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 800;
+    margin-bottom: 12px;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+  }
+  .section-intro {
+    color: #A8C0D0;
+    max-width: 520px;
+    margin-bottom: 48px;
+    font-size: 0.95rem;
+  }
+
+  /* ── WHAT YOU LEARN ── */
+  .learn-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
+  }
+  .learn-card {
+    background: var(--navy-mid);
+    border: 1px solid rgba(21,101,192,0.2);
+    border-radius: 16px;
+    padding: 28px 24px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .learn-card:hover { border-color: var(--blue); transform: translateY(-3px); }
+  .learn-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    background: rgba(21,101,192,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 16px;
+  }
+  .learn-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+  .learn-card p { font-size: 0.82rem; color: #8FA3B1; line-height: 1.5; }
+
+  /* ── HOW IT WORKS ── */
+  .steps-bg { background: var(--navy-mid); }
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0;
+    position: relative;
+  }
+  .step {
+    padding: 32px 24px;
+    position: relative;
+    text-align: center;
+  }
+  .step-num {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue), var(--blue-bright));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; font-weight: 900;
+    margin: 0 auto 16px;
+    box-shadow: 0 4px 16px rgba(21,101,192,0.4);
+  }
+  .step h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; }
+  .step p { font-size: 0.8rem; color: #8FA3B1; }
+
+  /* ── TESTIMONIALS ── */
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  .testi-card {
+    background: var(--navy-mid);
+    border: 1px solid rgba(21,101,192,0.2);
+    border-radius: 16px;
+    padding: 24px;
+  }
+  .testi-stars { color: #FFD700; font-size: 0.85rem; margin-bottom: 12px; }
+  .testi-text { font-size: 0.87rem; color: #BFD0DE; line-height: 1.6; margin-bottom: 16px; }
+  .testi-author { display: flex; align-items: center; gap: 12px; }
+  .testi-avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue), var(--accent));
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 0.9rem;
+  }
+  .testi-name { font-size: 0.85rem; font-weight: 700; }
+  .testi-role { font-size: 0.72rem; color: var(--muted); }
+
+  /* ── CTA SECTION ── */
+  .cta-section {
+    background: linear-gradient(135deg, var(--blue) 0%, #0D47A1 100%);
+    text-align: center;
+    border-radius: 24px;
+    margin: 0 5% 72px;
+    padding: 56px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-section::after {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+  }
+  .cta-section h2 { font-size: clamp(1.4rem, 3vw, 2rem); margin-bottom: 12px; }
+  .cta-section p { color: rgba(255,255,255,0.75); margin-bottom: 32px; font-size: 0.95rem; }
+  .cta-section .btn-wa {
+    display: inline-flex;
+    font-size: 1.1rem;
+    padding: 16px 36px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #060E16;
+    padding: 32px 5%;
+    text-align: center;
+    border-top: 1px solid rgba(21,101,192,0.15);
+  }
+  footer p { font-size: 0.78rem; color: var(--muted); }
+  footer a { color: var(--wa-green); text-decoration: none; }
+
+  /* ── MOBILE ── */
+  @media (max-width: 700px) {
+    .hero {
+      grid-template-columns: 1fr;
+      padding-top: 80px;
+      text-align: center;
+      gap: 40px;
+    }
+    .hero-img-wrap { order: -1; }
+    .hero-btns { justify-content: center; }
+    .hero-stats { justify-content: center; }
+    .section-intro { margin-left: auto; margin-right: auto; }
+    .cta-section { margin: 0 0 40px; border-radius: 0; }
+    .step-num { margin-bottom: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Sanjeev <span>Kumar</span></div>
+  <a class="nav-cta" href="https://wa.me/916283923728?text=Hello%20Sanjeev%20bhai%2C%20mujhe%20digital%20skills%20seekni%20hai%21" target="_blank">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.117 1.528 5.855L0 24l6.335-1.504A11.951 11.951 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.88 0-3.64-.49-5.17-1.35L2 22l1.35-4.83A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    WhatsApp Join करें
+  </a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-badge">🚀 Ghar Baithe Skills Seekho</div>
+    <h1>
+      Apna Brand Banao,
+      <span class="highlight">Digital Income Paao!</span>
+    </h1>
+    <p class="hero-sub">
+      Main Sanjeev Kumar — main aapko sikhaunga ki phone se ghar baithe digital skills seekhkar apna khud ka brand kaise banate hain aur income kaise start karte hain.
+    </p>
+    <div class="hero-btns">
+      <a class="btn-wa" href="https://wa.me/916283923728?text=Hello%20Sanjeev%20bhai%2C%20mujhe%20digital%20skills%20seekni%20hai%21" target="_blank">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.117 1.528 5.855L0 24l6.335-1.504A11.951 11.951 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.88 0-3.64-.49-5.17-1.35L2 22l1.35-4.83A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        WhatsApp pe Connect karo
+      </a>
+      <a class="btn-ghost" href="#learn">Kya Seekhoge?</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><strong>500+</strong><span>Students Trained</span></div>
+      <div class="stat"><strong>100%</strong><span>Phone se kaam</span></div>
+      <div class="stat"><strong>24/7</strong><span>Support</span></div>
+    </div>
+  </div>
+
+  <div class="hero-img-wrap">
+    <div class="hero-img-frame">
+      <img src="/mnt/user-data/uploads/1000048739.png" alt="Sanjeev Kumar – Digital Skills Mentor">
+      <div class="hero-tag">
+        <div class="live-dot"></div>
+        Abhi Available Hoon
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT YOU LEARN -->
+<section id="learn">
+  <div class="section-label">Kya Seekhoge</div>
+  <h2>Ghar Baithe Seekho, Phone Se Kamao</h2>
+  <p class="section-intro">Housewives, students, freelancers — sab ke liye easy aur practical skills jo turant kaam aaye.</p>
+  <div class="learn-grid">
+    <div class="learn-card">
+      <div class="learn-icon">📱</div>
+      <h3>Social Media Marketing</h3>
+      <p>Instagram, Facebook aur YouTube par apna brand grow karo aur clients attract karo.</p>
+    </div>
+    <div class="learn-card">
+      <div class="learn-icon">🤝</div>
+      <h3>Affiliate Marketing</h3>
+      <p>Products promote karo, commission kamao — bina kuch invest kiye income shuru karo.</p>
+    </div>
+    <div class="learn-card">
+      <div class="learn-icon">✍️</div>
+      <h3>Content Creation</h3>
+      <p>Reels, posts aur videos banao jo viral ho — apni story duniya ko batao.</p>
+    </div>
+    <div class="learn-card">
+      <div class="learn-icon">💰</div>
+      <h3>Personal Branding</h3>
+      <p>Apna naam, apni pehchaan — logo ko brand bano aur trust build karo online.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="steps-bg">
+  <div style="padding: 0 5%;">
+    <div class="section-label">Kaise Kaam Karta Hai</div>
+    <h2>4 Simple Steps Mein Shuruat</h2>
+    <p class="section-intro">Beginners ke liye specially design kiya gaya — koi prior knowledge nahi chahiye.</p>
+  </div>
+  <div class="steps-grid">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>WhatsApp Connect karo</h3>
+      <p>Seedha mere WhatsApp par message karo aur apna journey shuru karo.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>Free Consultation</h3>
+      <p>Main samjhunga ki tumhare liye kaunsi skills best hain aur kaise aage badhna hai.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>Training Shuru</h3>
+      <p>Step-by-step training modules — phone se hi karo, apni speed par.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <h3>Income Generate karo</h3>
+      <p>Training ke saath hi implement karo aur pehla paisa kamao.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section>
+  <div class="section-label">Success Stories</div>
+  <h2>Log Keh Rahe Hain…</h2>
+  <p class="section-intro">Real results, real people. Dekho kaise unhone apni zindagi badli.</p>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Pehle socha tha ghar baithe income nahi hoti. Sanjeev bhai ne dikhaya kaise hoti hai. Ab main ₹15,000+ har mahine kama rahi hoon sirf phone se!"</p>
+      <div class="testi-author">
+        <div class="testi-avatar">P</div>
+        <div>
+          <div class="testi-name">Priya Sharma</div>
+          <div class="testi-role">Housewife, Lucknow</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Job ke saath part-time try kiya — aur pehle hi mahine 8,000 rupe kamaye. Support ekdam zyada tha, hamesha available rehte hain."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">R</div>
+        <div>
+          <div class="testi-name">Rahul Verma</div>
+          <div class="testi-role">Working Professional, Jaipur</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Student hun, part-time karta hun. Sanjeev bhai ki training se affiliate marketing seekha aur ab pocket money khud nikalti hai."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">A</div>
+        <div>
+          <div class="testi-name">Anjali Singh</div>
+          <div class="testi-role">College Student, Kanpur</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="live-dot" style="margin: 0 auto 16px;"></div>
+  <h2>Abhi Shuru Karo — Free Mein Baat Karo!</h2>
+  <p>Koi fees nahi, koi commitment nahi. Sirf ek message karo aur apna digital journey shuru karo.</p>
+  <a class="btn-wa" href="https://wa.me/916283923728?text=Hello%20Sanjeev%20bhai%2C%20mujhe%20digital%20skills%20seekni%20hai!%20Aap%20se%20baat%20karni%20hai." target="_blank" style="justify-content:center;">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.553 4.117 1.528 5.855L0 24l6.335-1.504A11.951 11.951 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.88 0-3.64-.49-5.17-1.35L2 22l1.35-4.83A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    WhatsApp pe Message Karo
+  </a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Sanjeev Kumar — Digital Skills Mentor &nbsp;|&nbsp; <a href="https://wa.me/916283923728" target="_blank">WhatsApp pe Connect karo</a></p>
+</footer>
+
+</body>
+</html>
